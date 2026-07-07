@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半自动人类实验室 · 把重复交给机器，把时间还给人</title>
+<meta name="description" content="把重复交给机器，把时间还给人。用 AI 做自动化工具、写实操教程、做叙事小游戏。">
+<meta property="og:title" content="半自动人类实验室">
+<meta property="og:description" content="把重复交给机器，把时间还给人">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#faf8f4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2341604f'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23faf8f4' font-family='serif'%3E半%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #2b2925;
+    --muted: #8b867c;
+    --line: #e7e3da;
+    --accent: #41604f;
+    --accent-soft: #eef2ee;
+    --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --sans: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+  }
+  ::selection { background: var(--accent); color: var(--paper); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── 顶栏 ── */
+  nav {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 28px 0 0;
+  }
+  nav .logo { font-family: var(--serif); font-weight: 900; font-size: 17px; color: var(--ink); }
+  nav .links a { color: var(--muted); font-size: 13.5px; margin-left: 18px; }
+  nav .links a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  header.hero { padding: 88px 0 56px; }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(38px, 8vw, 54px);
+    line-height: 1.25; letter-spacing: 0.04em;
+  }
+  .hero .slogan {
+    margin-top: 14px; font-size: 16.5px; color: var(--accent);
+    font-weight: 600; letter-spacing: 0.06em;
+  }
+  .hero .intro { margin-top: 26px; color: var(--ink); max-width: 40em; }
+  .hero .contact { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    font-size: 13px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 99px;
+    padding: 5px 14px; background: #fff;
+  }
+  .chip b { color: var(--ink); font-weight: 600; }
+
+  /* ── 分节 ── */
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  .label {
+    font-size: 12.5px; letter-spacing: 0.28em; color: var(--muted);
+    margin-bottom: 26px; text-transform: uppercase;
+  }
+  .label em { font-style: normal; color: var(--accent); margin-right: 8px; }
+
+  /* ── 现在在做 ── */
+  .now-box {
+    border: 1px solid var(--line); border-radius: 14px; background: #fff;
+    padding: 26px 28px; display: flex; gap: 28px; align-items: flex-start;
+  }
+  .now-list { list-style: none; }
+  .now-list li { display: flex; align-items: baseline; gap: 12px; padding: 5px 0; font-size: 15px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; position: relative; top: -2px; }
+  .dot.on { background: var(--accent); }
+  .dot.off { background: var(--line); }
+  .now-list .st { margin-left: auto; font-size: 12.5px; color: var(--muted); flex-shrink: 0; }
+
+  /* ── 作品 ── */
+  .work { padding: 22px 0; border-bottom: 1px dashed var(--line); }
+  .work:last-child { border-bottom: none; }
+  .work .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .work h3 { font-family: var(--serif); font-weight: 600; font-size: 18.5px; }
+  .pill {
+    font-size: 11.5px; padding: 2px 10px; border-radius: 99px; letter-spacing: 0.08em;
+  }
+  .pill.live { background: var(--accent-soft); color: var(--accent); }
+  .pill.wip { border: 1px solid var(--line); color: var(--muted); }
+  .work p { margin-top: 6px; font-size: 14.5px; color: var(--muted); }
+
+  /* ── 文字 ── */
+  .platforms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+  .writing-list { list-style: none; }
+  .writing-list li {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 15px;
+  }
+  .writing-list li span.date { font-size: 12.5px; color: var(--muted); flex-shrink: 0; }
+
+  /* ── 合作 ── */
+  .offer { padding: 16px 0; }
+  .offer h3 { font-size: 16px; font-weight: 600; }
+  .offer p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+  .cta {
+    margin-top: 28px; border: 1px solid var(--line); border-radius: 14px;
+    background: #fff; padding: 24px 28px;
+  }
+  .cta p { font-size: 14.5px; color: var(--muted); }
+  .cta .btn {
+    display: inline-block; margin-top: 14px;
+    background: var(--accent); color: var(--paper);
+    padding: 9px 26px; border-radius: 99px; font-size: 14.5px; letter-spacing: 0.05em;
+  }
+  .cta .btn:hover { text-decoration: none; opacity: 0.9; }
+
+  /* ── 关于 ── */
+  .about p { margin-bottom: 14px; }
+  .facts { list-style: none; margin-top: 18px; }
+  .facts li { padding: 4px 0; font-size: 15px; color: var(--ink); }
+  .facts li::before { content: "— "; color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 0 56px; font-size: 13px; color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 560px) {
+    header.hero { padding: 64px 0 44px; }
+    .now-box { flex-direction: column; gap: 18px; padding: 22px; }
+    nav .links a { margin-left: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <span class="logo">半自动人类实验室</span>
+    <span class="links">
+      <a href="#works">作品</a>
+      <a href="#writing">文字</a>
+      <a href="#offer">合作</a>
+      <a href="#about">关于</a>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <h1>半自动人类实验室</h1>
+    <p class="slogan">把重复交给机器，把时间还给人</p>
+    <p class="intro">
+      这里是半自动人类实验室——一半交给自动化，一半留给人。
+      每期实验解决一件重复劳动：与 AI 结对做出工具，免费放出；
+      也写教程，做叙事小游戏。这一页记录实验室的全部产出。
+    </p>
+    <div class="contact">
+      <span class="chip">📮 <b>semiautohuman@outlook.com</b></span>
+      <span class="chip">公众号 <b>半自动人类实验室</b></span>
+      <span class="chip">小红书 <b>@半自动人类实验室</b></span>
+    </div>
+  </header>
+
+  <section id="now">
+    <p class="label"><em>01</em>现在在做</p>
+    <div class="now-box">
+      <ul class="now-list">
+        <li><span class="dot on"></span>「普通人抄作业的 AI 自动化」系列教程 <span class="st">连载中</span></li>
+        <li><span class="dot on"></span>表格急救箱（实验 001 & 002）<span class="st">已上线，迭代中</span></li>
+        <li><span class="dot off"></span>第一个叙事小游戏 <span class="st">酝酿中</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="works">
+    <p class="label"><em>02</em>作品</p>
+    <div class="work">
+      <div class="head"><h3>本站 · 作品集</h3><span class="pill live">已上线</span></div>
+      <p>与 AI 结对、半天从零搭建。本站即作品：我如何用 AI 做东西的第一个样本。</p>
+    </div>
+    <div class="work">
+      <div class="head"><h3><a href="table/">表格急救箱</a></h3><span class="pill live">已上线</span></div>
+      <p>上传 Excel：一键清理、去重、名单核对、打印排版；也可以一句话让 AI 解决任何表格问题。零配置、免费、数据不出你的电脑。</p>
+    </div>
+    <div class="work">
+      <div class="head"><h3>第一个叙事小游戏</h3><span class="pill wip">酝酿中</span></div>
+      <p>从一次 48 小时 Game Jam 开始的小品级作品。关于人、机器和时间。</p>
+    </div>
+  </section>
+
+  <section id="writing">
+    <p class="label"><em>03</em>文字</p>
+    <div class="platforms">
+      <span class="chip">公众号 <b>半自动人类实验室</b>：长文与教程</span>
+      <span class="chip">小红书 <b>@半自动人类实验室</b>：实操与日常</span>
+    </div>
+    <ul class="writing-list">
+      <li>第一篇文章正在路上 <span class="date">即将发布</span></li>
+      <li>小工具与小游戏的开发过程笔记 <span class="date">连载</span></li>
+    </ul>
+  </section>
+
+  <section id="offer">
+    <p class="label"><em>04</em>合作</p>
+    <div class="offer">
+      <h3>AI 自动化咨询</h3>
+      <p>帮你把重复的工作流变成一键自动化：诊断、方案、落地，固定范围与报价。</p>
+    </div>
+    <div class="offer">
+      <h3>定制小工具</h3>
+      <p>为你的具体场景开发轻量工具——表格处理、内容流水线、数据整理，交付即可用。</p>
+    </div>
+    <div class="offer">
+      <h3>内容合作</h3>
+      <p>约稿、转载、对谈。方向：AI 实操、技术与人的观察、游戏与叙事。</p>
+    </div>
+    <div class="cta">
+      <p>所有合作均为固定范围、书面约定、预付启动。目前只接少量合作——回复不快，但一定回复。</p>
+      <a class="btn" href="mailto:semiautohuman@outlook.com?subject=合作咨询">📮 邮件联系</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="label"><em>05</em>关于</p>
+    <div class="about">
+      <p>
+        没有履历，也没有头衔——这一页上做出来的东西，就是我的全部简历。
+      </p>
+      <ul class="facts">
+        <li>相信的事：技术应该把时间还给人</li>
+        <li>在意的事：做出来的东西真的对人有帮助</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 半自动人类实验室 · 本站由我与 AI 结对搭建
+  </footer>
+
+</div>
+</body>
+</html>
