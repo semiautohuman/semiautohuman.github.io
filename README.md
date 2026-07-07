@@ -16,4 +16,4 @@ Each experiment tackles one piece of repetitive work — the resulting tools are
 
 ## 📮 联系 Contact
 
-微信公众号：半自动人类实验室 · 小红书：@半自动人类实验室
+📮 semiautohuman@outlook.com · 微信公众号：半自动人类实验室 · 小红书：@半自动人类实验室
